@@ -533,11 +533,12 @@ function MediaBrowser() {
 
       <ModuleBlock
         title="Browser Control"
-        intro="Full browser automation via Playwright — navigate, search, click, fill forms, read pages, and screenshot."
+        intro="Read a URL instantly with fetch + Claude (no browser), or drive a real browser for interaction — navigate, search, click, fill forms, screenshot."
         rows={[
-          { cmd: 'browse <url>  /  go to <url>', desc: 'Navigate to a URL.' },
+          { cmd: 'read <url>  /  summarize <url>', desc: 'Read & summarize a page with fetch + Claude — no browser launch. Falls back to a real browser only for JS-heavy pages.' },
+          { cmd: 'browse <url>  /  go to <url>', desc: 'Open a URL in the browser.' },
           { cmd: 'search <query>', desc: 'Run a Google search.' },
-          { cmd: 'read this page', desc: 'Extract and display page content.' },
+          { cmd: 'read this page', desc: 'Extract content from the currently open browser page.' },
           { cmd: 'click <element>', desc: 'Click an element on the page.' },
           { cmd: 'fill <field> with <value>', desc: 'Fill a form field.' },
           { cmd: 'screenshot', desc: 'Take a browser screenshot.' },
@@ -571,15 +572,17 @@ function Screen() {
       <Eyebrow>07 — Modules</Eyebrow>
       <SectionHeading>Screen awareness</SectionHeading>
       <Lead>
-        JARVIS can see what is on your screen via OCR and act on text you have selected.
+        JARVIS sees your screen with Claude vision — it reads a screenshot directly, so it
+        understands layout, buttons, and content, not just text.
       </Lead>
 
       <ModuleBlock
         title="Screen Awareness"
-        intro="OCR-based screen reading. The conversation engine can inject screen context into a conversation for context-aware answers."
+        intro="Claude vision reads the screenshot directly — one call, no OCR step — so it's faster and more accurate. OCR (macOS Vision / Tesseract) stays as an offline fallback. Screen context can also be injected into a conversation for context-aware answers."
         rows={[
-          { cmd: "what's on my screen", desc: 'OCR reads the screen and describes what it sees.' },
-          { cmd: 'read screen', desc: 'Extract all visible text via OCR.' },
+          { cmd: "what's on my screen", desc: 'Claude vision describes what it sees.' },
+          { cmd: 'summarize my screen', desc: 'A 2-3 sentence summary of the current screen.' },
+          { cmd: 'read screen', desc: 'Extract all visible text (OCR).' },
         ]}
       />
 
@@ -1028,7 +1031,6 @@ function Docs() {
         {/* Sidebar */}
         <aside className="hidden md:block w-56 flex-shrink-0">
           <div className="sticky top-28">
-            <div className="eyebrow mb-4">On this page</div>
             <nav className="space-y-1 border-l border-line max-h-[calc(100vh-9rem)] overflow-y-auto">
               {SECTIONS.map((s, i) => (
                 <a
