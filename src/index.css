@@ -61,11 +61,13 @@ body {
   letter-spacing: -0.015em;
   color: var(--ink);
 }
+/* Highlight words sit inline in headings — upright, same colour as the heading.
+   (No italics, no colour-pop: keeps the type restrained, not "designed".) */
 .display-italic {
   font-family: 'Fraunces', Georgia, serif;
-  font-style: italic;
-  font-weight: 500;
-  color: var(--accent);
+  font-style: normal;
+  font-weight: 600;
+  color: inherit;
 }
 
 /* ── Cards ── */

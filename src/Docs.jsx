@@ -451,19 +451,13 @@ function Docs() {
         <div className="max-w-6xl mx-auto fade-up">
           <Eyebrow>Documentation</Eyebrow>
           <h1 className="display text-5xl md:text-6xl leading-tight">
-            The <span className="display-italic">J.A.R.V.I.S.</span> handbook
+            JARVIS handbook
           </h1>
           <p className="text-ink-2 text-lg mt-5 max-w-2xl leading-relaxed">
             A macOS AI assistant with voice control, screen awareness, deep research, a Rust
             performance sidecar, and multi-device support. Everything you need to install,
             understand, and extend it.
           </p>
-          <div className="flex flex-wrap gap-x-8 gap-y-2 mt-8 mono text-[0.78rem] text-ink-3">
-            <span><span className="text-accent font-bold">45+</span> Modules</span>
-            <span><span className="text-accent font-bold">500+</span> Commands</span>
-            <span><span className="text-accent font-bold">7</span> Parse Phases</span>
-            <span><span className="text-accent font-bold">4</span> Engines</span>
-          </div>
         </div>
       </header>
 
