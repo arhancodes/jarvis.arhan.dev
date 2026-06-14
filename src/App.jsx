@@ -170,8 +170,8 @@ function Hero() {
         </h1>
 
         <p className="text-ink-2 text-lg md:text-xl leading-relaxed mt-8 max-w-2xl fade-up d3">
-          A macOS AI assistant with voice control, screen awareness, deep research, a Rust
-          performance sidecar, and multi-device support.
+          A macOS AI assistant with voice control, screen awareness, browser automation, and
+          connection across Apple devices.
         </p>
 
         <div className="flex flex-wrap items-center gap-4 mt-10 fade-up d4">
