@@ -166,7 +166,7 @@ function Hero() {
         <p className="eyebrow fade-up d1">Just A Rather Very Intelligent System</p>
 
         <h1 className="display text-5xl sm:text-6xl lg:text-7xl leading-[1.04] mt-6 max-w-4xl fade-up d2">
-          Your Mac <RotatingWord />
+          Your macOS <RotatingWord />
         </h1>
 
         <p className="text-ink-2 text-lg md:text-xl leading-relaxed mt-8 max-w-2xl fade-up d3">

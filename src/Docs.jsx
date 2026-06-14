@@ -1026,13 +1026,7 @@ function Docs() {
       {/* Header band */}
       <header className="pt-36 pb-14 px-6 border-b border-line">
         <div className="max-w-6xl mx-auto fade-up">
-          <Eyebrow>Documentation</Eyebrow>
-          <h1 className="display text-5xl md:text-6xl leading-tight">JARVIS handbook</h1>
-          <p className="text-ink-2 text-lg mt-5 max-w-2xl leading-relaxed">
-            A macOS AI assistant with voice control, screen awareness, deep research, a Rust
-            performance sidecar, and multi-device support. Everything you need to install,
-            understand, and extend it — every module, every command.
-          </p>
+          <h1 className="display text-5xl md:text-6xl leading-tight">Docs</h1>
         </div>
       </header>
 
