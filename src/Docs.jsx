@@ -1023,15 +1023,8 @@ function Docs() {
         </div>
       </nav>
 
-      {/* Header band */}
-      <header className="pt-36 pb-14 px-6 border-b border-line">
-        <div className="max-w-6xl mx-auto fade-up">
-          <h1 className="display text-5xl md:text-6xl leading-tight">Docs</h1>
-        </div>
-      </header>
-
       {/* Layout */}
-      <div className="max-w-6xl mx-auto px-6 flex gap-12 pt-14">
+      <div className="max-w-6xl mx-auto px-6 flex gap-12 pt-36">
         {/* Sidebar */}
         <aside className="hidden md:block w-56 flex-shrink-0">
           <div className="sticky top-28">
