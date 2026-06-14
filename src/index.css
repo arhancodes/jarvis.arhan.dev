@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -10,70 +10,144 @@
   box-sizing: border-box;
 }
 
+:root {
+  --paper: #F4EFE6;
+  --paper-2: #EBE5D9;
+  --ink: #1F1B16;
+  --ink-2: #514A3F;
+  --ink-3: #8C8275;
+  --accent: #C0533A;
+  --accent-dark: #A23E29;
+  --line: #DAD2C4;
+}
+
+html { scroll-behavior: smooth; }
+
 body {
   font-family: 'Inter', sans-serif;
-  background: #050508;
-  color: #e4e4e7;
+  background: var(--paper);
+  color: var(--ink);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #1a1a25; border-radius: 3px; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--paper); }
+::-webkit-scrollbar-thumb { background: #CABFAD; border-radius: 4px; }
 
-.glow-gold { text-shadow: 0 0 20px rgba(255, 183, 0, 0.5), 0 0 40px rgba(255, 183, 0, 0.2); }
-
+/* ── Print-grid background ── */
 .bg-grid {
   background-image:
-    linear-gradient(rgba(255, 183, 0, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 183, 0, 0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
+    linear-gradient(rgba(31, 27, 22, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31, 27, 22, 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
 }
 
-.card-hover {
-  transition: all 0.3s ease;
-}
-.card-hover:hover {
-  transform: translateY(-4px);
-  border-color: rgba(255, 183, 0, 0.3);
-  box-shadow: 0 8px 32px rgba(255, 183, 0, 0.1);
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-.cursor-blink::after {
-  content: '|';
-  animation: blink 1s step-end infinite;
-  color: #FFB700;
+/* ── Eyebrow label (mono, uppercase, letter-spaced) ── */
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-3);
 }
 
-.arc-reactor {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #FFB700 0%, #CC9200 40%, transparent 70%);
-  box-shadow: 0 0 60px rgba(255, 183, 0, 0.4), 0 0 120px rgba(255, 183, 0, 0.1);
-  animation: reactor-pulse 3s ease-in-out infinite;
+/* ── Display serif heading ── */
+.display {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+.display-italic {
+  font-family: 'Fraunces', Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent);
 }
 
-@keyframes reactor-pulse {
-  0%, 100% { box-shadow: 0 0 60px rgba(255, 183, 0, 0.4), 0 0 120px rgba(255, 183, 0, 0.1); }
-  50% { box-shadow: 0 0 80px rgba(255, 183, 0, 0.6), 0 0 160px rgba(255, 183, 0, 0.2); }
+/* ── Cards ── */
+.card {
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-radius: 16px;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card:hover {
+  border-color: #B9AD98;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(31, 27, 22, 0.06);
 }
 
-@keyframes fade-in-up {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  transition: all 0.18s ease;
+  cursor: pointer;
 }
-.animate-fade-in-up {
-  animation: fade-in-up 0.8s ease-out forwards;
-  opacity: 0;
+.btn-accent {
+  background: var(--accent);
+  color: #F4EFE6;
+  border: 1.5px solid var(--accent);
 }
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
-.delay-400 { animation-delay: 0.4s; }
-.delay-500 { animation-delay: 0.5s; }
-.delay-600 { animation-delay: 0.6s; }
+.btn-accent:hover { background: var(--accent-dark, #A23E29); transform: translateY(-1px); }
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+}
+.btn-outline:hover { background: var(--ink); color: var(--paper); }
+
+/* ── Mono pill (LISTENING-style state chip) ── */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  background: var(--paper);
+  border: 1.5px solid var(--accent);
+  color: var(--accent);
+}
+
+/* ── Waveform bars (for the pill) ── */
+.wave { display: inline-flex; align-items: center; gap: 2px; height: 14px; }
+.wave i {
+  display: block; width: 2.5px; border-radius: 2px; background: var(--accent);
+  animation: wave 0.5s ease-in-out infinite alternate;
+}
+.wave i:nth-child(1) { height: 5px; animation-delay: 0s; }
+.wave i:nth-child(2) { height: 12px; animation-delay: 0.1s; }
+.wave i:nth-child(3) { height: 8px; animation-delay: 0.2s; }
+.wave i:nth-child(4) { height: 14px; animation-delay: 0.12s; }
+.wave i:nth-child(5) { height: 6px; animation-delay: 0.05s; }
+@keyframes wave { 0% { transform: scaleY(0.4); } 100% { transform: scaleY(1); } }
+
+/* ── Hairline divider ── */
+.rule { height: 1.5px; background: var(--line); border: 0; }
+
+/* ── Mono code / terminal ── */
+.mono { font-family: 'JetBrains Mono', monospace; }
+
+/* ── Fade-up on load ── */
+@keyframes fade-up { 0% { opacity: 0; transform: translateY(14px); } 100% { opacity: 1; transform: translateY(0); } }
+.fade-up { animation: fade-up 0.6s ease forwards; opacity: 0; }
+.d1 { animation-delay: 0.06s; }
+.d2 { animation-delay: 0.12s; }
+.d3 { animation-delay: 0.18s; }
+.d4 { animation-delay: 0.24s; }
+.d5 { animation-delay: 0.3s; }
+.d6 { animation-delay: 0.36s; }

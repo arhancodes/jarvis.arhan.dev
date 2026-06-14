@@ -1,33 +1,77 @@
-import { useState, useEffect, useRef } from 'react'
 import './index.css'
 
 const FEATURES = [
-  { icon: '🎙', title: 'Voice Assistant', desc: 'Always-on wake word detection. Say "Jarvis" and speak naturally — on-device speech recognition via ElevenLabs or Edge TTS.', demo: 'jarvis> "open Safari and play some music"' },
-  { icon: '🧠', title: 'Conversational AI', desc: 'Multi-turn conversations powered by Claude API. Executes actions mid-conversation and remembers context across sessions.', demo: 'jarvis> remember my SSH key is at ~/.ssh/id_ed25519' },
-  { icon: '🔬', title: 'Deep Research', desc: 'Multi-hop research agent — searches arXiv, Semantic Scholar, and the web. Multiple investigation rounds with cited reports.', demo: 'jarvis> deep research transformer architectures' },
-  { icon: '⚡', title: 'Rust Sidecar', desc: 'Compiled Rust binary for sub-millisecond vector search, fuzzy matching, and trace analytics. Falls back to TypeScript when unavailable.', demo: '[rust-bridge] Sidecar ready — 4 capabilities' },
-  { icon: '🧬', title: 'Intelligence Layer', desc: 'Trace-driven learning — records every command, detects habits, predicts your next action, and suggests automations.', demo: 'Habit: You run "battery" every morning (92% regularity)' },
-  { icon: '👁', title: 'Screen Awareness', desc: "OCR-based screen reading — JARVIS can see what's on your screen and respond to it contextually.", demo: "jarvis> what's on my screen right now?" },
-  { icon: '🌐', title: 'Browser Automation', desc: 'Full Playwright-powered browser control — navigate, search, click, fill forms, read pages, take screenshots.', demo: 'jarvis> browse youtube.com' },
-  { icon: '⌚', title: 'Multi-Device', desc: 'Apple Watch and iPhone apps connect via AIM WebSocket relay. Same JARVIS across all your devices.', demo: 'Connected: Mac, iPhone, Apple Watch' },
-  { icon: '🏠', title: 'Smart Home', desc: 'HomeKit control via macOS Shortcuts — lights, thermostat, locks, scenes. Natural language device control.', demo: 'jarvis> turn off the living room lights' },
-  { icon: '🎵', title: 'Spotify & Media', desc: 'Full Spotify Web API integration — play, pause, search, playlists, queue. Plus Apple Music control.', demo: 'jarvis> play Osamason on Spotify' },
-  { icon: '🛡', title: 'Security Monitoring', desc: 'Always-on breach monitor, network guardian, and threat detection. Alerts on your Apple Watch.', demo: '[breach-monitor] Scanning dark web...' },
-  { icon: '🤖', title: 'Multi-Agent', desc: 'Spawn parallel agents for complex tasks. Coding agent, dev agent, and self-improving module generator.', demo: 'jarvis> run coding agent on ~/project' },
-  { icon: '📧', title: 'Email & Calendar', desc: 'Gmail and Google Calendar integration — read, send, schedule. Morning digest with daily briefing.', demo: 'jarvis> check my email' },
-  { icon: '🔧', title: 'System Control', desc: 'Volume, brightness, dark mode, DND, sleep, lock — full macOS system control with 200+ commands.', demo: 'jarvis> dark mode on && volume 30' },
-  { icon: '🔌', title: 'Plugin System', desc: 'Hot-reloadable modules with @RegisterModule() decorator. Install community plugins or generate your own.', demo: 'jarvis> self-improve: create a pomodoro module' },
+  {
+    title: 'Voice Assistant',
+    desc: 'Always-on wake word detection. Say "Jarvis" and speak naturally; on-device speech recognition with ElevenLabs or Edge TTS.',
+  },
+  {
+    title: 'Conversational AI',
+    desc: 'Multi-turn conversations powered by Claude API. Executes actions mid-conversation and remembers context across sessions.',
+  },
+  {
+    title: 'Deep Research',
+    desc: 'Multi-hop research agent across arXiv, Semantic Scholar, and the web. Multiple investigation rounds with cited reports.',
+  },
+  {
+    title: 'Rust Sidecar',
+    desc: 'Compiled Rust binary for sub-millisecond vector search, fuzzy matching, and trace analytics. Falls back to TypeScript when unavailable.',
+  },
+  {
+    title: 'Intelligence Layer',
+    desc: 'Trace-driven learning: records every command, detects habits, predicts your next action, suggests automations.',
+  },
+  {
+    title: 'Screen Awareness',
+    desc: 'OCR-based screen reading; JARVIS can see what’s on your screen and respond contextually.',
+  },
+  {
+    title: 'Browser Automation',
+    desc: 'Full Playwright-powered browser control: navigate, search, click, fill forms, read pages, screenshot.',
+  },
+  {
+    title: 'Multi-Device',
+    desc: 'Apple Watch and iPhone apps connect via AIM WebSocket relay. Same JARVIS across all your devices.',
+  },
+  {
+    title: 'Smart Home',
+    desc: 'HomeKit control via macOS Shortcuts: lights, thermostat, locks, scenes. Natural language device control.',
+  },
+  {
+    title: 'Spotify & Media',
+    desc: 'Full Spotify Web API integration plus Apple Music control: play, pause, search, playlists, queue.',
+  },
+  {
+    title: 'Security Monitoring',
+    desc: 'Always-on breach monitor, network guardian, and threat detection. Alerts on your Apple Watch.',
+  },
+  {
+    title: 'Multi-Agent',
+    desc: 'Spawn parallel agents for complex tasks: coding agent, dev agent, self-improving module generator.',
+  },
+  {
+    title: 'Email & Calendar',
+    desc: 'Gmail and Google Calendar integration: read, send, schedule. Morning digest daily briefing.',
+  },
+  {
+    title: 'System Control',
+    desc: 'Volume, brightness, dark mode, DND, sleep, lock; full macOS control with 200+ commands.',
+  },
+  {
+    title: 'WhatsApp',
+    desc: 'Instant WhatsApp messaging via the multi-device protocol (Baileys) — sub-second sends, no browser.',
+  },
 ]
 
 const COMMANDS = [
-  { cmd: 'research quantum computing', result: '15 papers analyzed, report saved', icon: '🔬' },
-  { cmd: 'battery', result: 'Battery: 85%, charging', icon: '🔋' },
-  { cmd: 'play Osamason on Spotify', result: 'Playing on Spotify...', icon: '🎵' },
-  { cmd: 'deep research AI agents', result: '4 rounds, 28 papers, 12 web sources', icon: '🧠' },
-  { cmd: 'good morning', result: 'Running morning routine...', icon: '☀️' },
-  { cmd: 'turn off living room lights', result: 'HomeKit: lights off', icon: '🏠' },
-  { cmd: "what's on my screen?", result: 'I can see VS Code open with...', icon: '👁' },
-  { cmd: 'compare React vs Vue', result: 'Comparison complete with table', icon: '⚡' },
+  { cmd: 'research quantum computing', result: '15 papers analyzed, report saved' },
+  { cmd: 'battery', result: 'Battery: 85%, charging' },
+  { cmd: 'play Osamason on Spotify', result: 'Playing on Spotify...' },
+  { cmd: 'deep research AI agents', result: '4 rounds, 28 papers, 12 web sources' },
+  { cmd: 'good morning', result: 'Running morning routine...' },
+  { cmd: 'turn off living room lights', result: 'HomeKit: lights off' },
+  { cmd: "what's on my screen?", result: 'I can see VS Code open with...' },
+  { cmd: 'whatsapp mom running late', result: 'Message sent to mom' },
 ]
 
 const STATS = [
@@ -37,262 +81,299 @@ const STATS = [
   { value: '4', label: 'Engines' },
 ]
 
-function TerminalDemo() {
-  const [lines, setLines] = useState([])
-  const [currentIdx, setCurrentIdx] = useState(0)
-  const termRef = useRef(null)
+const PARSE_PHASES = [
+  'Variable Expansion',
+  'Alias',
+  'Pattern',
+  'Keyword',
+  'Rust Fuzzy',
+  'NLU',
+  'Conversation AI',
+]
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const cmd = COMMANDS[currentIdx % COMMANDS.length]
-      setLines(prev => {
-        const newLines = [
-          ...prev,
-          { type: 'input', text: cmd.cmd },
-          { type: 'output', text: `  ✓ ${cmd.result}`, icon: cmd.icon },
-        ]
-        return newLines.slice(-12)
-      })
-      setCurrentIdx(prev => prev + 1)
-    }, 2500)
-    return () => clearInterval(interval)
-  }, [currentIdx])
+const BACKENDS = [
+  { name: 'TypeScript', desc: 'Core runtime, module orchestration, conversation loop.' },
+  { name: 'Rust Sidecar', desc: 'Sub-millisecond vector search, fuzzy match, trace analytics.' },
+  { name: 'Swift', desc: 'Native macOS, Apple Watch and iPhone companion apps.' },
+  { name: 'AppleScript / Shell', desc: 'System control, Shortcuts, and deep macOS integration.' },
+]
 
-  useEffect(() => {
-    if (termRef.current) {
-      termRef.current.scrollTop = termRef.current.scrollHeight
-    }
-  }, [lines])
+const GITHUB_URL = 'https://github.com/ArhanCodes/jarvis'
 
+function Nav() {
   return (
-    <div className="bg-jarvis-darker border border-jarvis-border rounded-xl overflow-hidden shadow-2xl max-w-2xl mx-auto">
-      <div className="flex items-center gap-2 px-4 py-3 bg-jarvis-card border-b border-jarvis-border">
-        <div className="w-3 h-3 rounded-full bg-red-500/80" />
-        <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-        <div className="w-3 h-3 rounded-full bg-green-500/80" />
-        <span className="ml-3 text-xs text-zinc-500 font-mono">jarvis — voice-daemon</span>
-      </div>
-      <div ref={termRef} className="p-5 h-72 overflow-hidden font-mono text-sm space-y-1">
-        <div className="text-zinc-500 text-xs mb-3">
-          ✓ Voice assistant started. Say "Jarvis" to activate.
+    <nav className="fixed top-0 inset-x-0 z-50 bg-paper/80 backdrop-blur-md border-b border-line">
+      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="#top" className="font-mono font-bold tracking-widest text-ink text-sm">
+          JARVIS
+        </a>
+        <div className="flex items-center gap-7 text-sm">
+          <a href="#features" className="text-ink-2 hover:text-accent transition-colors">
+            Features
+          </a>
+          <a href="/docs" className="text-ink-2 hover:text-accent transition-colors">
+            Docs
+          </a>
+          <a
+            href={GITHUB_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-ink-2 hover:text-accent transition-colors"
+          >
+            GitHub
+          </a>
         </div>
-        {lines.map((line, i) => (
-          <div key={i} className={`${line.type === 'input' ? 'text-jarvis-blue' : 'text-green-400'} transition-opacity duration-300`}>
-            {line.type === 'input' ? (
-              <span><span className="text-jarvis-blue font-bold">jarvis&gt;</span> {line.text}</span>
-            ) : (
-              <span>{line.text}</span>
-            )}
+      </div>
+    </nav>
+  )
+}
+
+function Hero() {
+  return (
+    <section id="top" className="bg-grid relative overflow-hidden">
+      <div className="max-w-5xl mx-auto px-6 pt-40 pb-28 md:pt-48 md:pb-36">
+        <p className="eyebrow fade-up d1">Just A Rather Very Intelligent System</p>
+
+        <h1 className="display text-5xl sm:text-6xl lg:text-7xl leading-[1.04] mt-6 max-w-4xl fade-up d2">
+          Your Mac, run by voice.{' '}
+          <span className="display-italic">Everything, from one prompt.</span>
+        </h1>
+
+        <p className="text-ink-2 text-lg md:text-xl leading-relaxed mt-8 max-w-2xl fade-up d3">
+          A macOS AI assistant with voice control, screen awareness, deep research, a Rust
+          performance sidecar, and multi-device support.
+        </p>
+
+        <div className="flex flex-wrap items-center gap-4 mt-10 fade-up d4">
+          <a href="/docs" className="btn btn-accent">
+            Read the docs <span aria-hidden="true">&rarr;</span>
+          </a>
+          <a
+            href={GITHUB_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-outline"
+          >
+            View on GitHub
+          </a>
+          <span className="pill ml-1">
+            <span className="wave" aria-hidden="true">
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+            </span>
+            Listening
+          </span>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function Stats() {
+  return (
+    <section className="border-y border-line bg-paper-2/40">
+      <div className="max-w-6xl mx-auto px-6 py-14">
+        <div className="grid grid-cols-2 md:grid-cols-4 divide-y divide-line md:divide-y-0 md:divide-x">
+          {STATS.map((stat) => (
+            <div key={stat.label} className="px-2 py-6 md:py-2 text-center md:text-left md:px-10">
+              <div className="display text-5xl md:text-6xl text-ink">{stat.value}</div>
+              <div className="eyebrow mt-3">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function Demo() {
+  return (
+    <section className="bg-grid">
+      <div className="max-w-5xl mx-auto px-6 py-24 md:py-32">
+        <p className="eyebrow">Talk to it like a person</p>
+        <h2 className="display text-4xl md:text-5xl mt-5 max-w-3xl leading-tight">
+          Plain language in.{' '}
+          <span className="display-italic">Real action out.</span>
+        </h2>
+
+        <div className="card mt-12 overflow-hidden">
+          <div className="flex items-center gap-2 px-5 py-3.5 border-b border-line">
+            <span className="w-3 h-3 rounded-full border border-line bg-paper-3" />
+            <span className="w-3 h-3 rounded-full border border-line bg-paper-3" />
+            <span className="w-3 h-3 rounded-full border border-line bg-paper-3" />
+            <span className="mono text-xs text-ink-3 ml-3 tracking-wide">
+              jarvis — voice-daemon
+            </span>
           </div>
-        ))}
-        <div className="text-jarvis-blue">
-          <span className="font-bold">jarvis&gt;</span> <span className="cursor-blink"></span>
+
+          <div className="p-6 md:p-8 mono text-sm md:text-[0.95rem] leading-relaxed">
+            {COMMANDS.map((c) => (
+              <div key={c.cmd} className="py-1.5">
+                <span className="text-ink-3 select-none">jarvis&gt;</span>{' '}
+                <span className="text-ink">{c.cmd}</span>
+                <span className="text-accent">{'  -> '}{c.result}</span>
+              </div>
+            ))}
+            <div className="py-1.5">
+              <span className="text-ink-3 select-none">jarvis&gt;</span>{' '}
+              <span className="text-accent" aria-hidden="true">
+                &#9608;
+              </span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 
-function FeatureCard({ icon, title, desc, demo, delay }) {
+function FeatureCard({ index, title, desc, delayClass }) {
   return (
-    <div className={`card-hover bg-jarvis-card border border-jarvis-border rounded-xl p-6 text-left animate-fade-in-up ${delay}`}>
-      <div className="text-3xl mb-3">{icon}</div>
-      <h3 className="text-lg font-semibold text-white mb-2">{title}</h3>
-      <p className="text-zinc-400 text-sm mb-4 leading-relaxed">{desc}</p>
-      <div className="font-mono text-xs text-jarvis-blue bg-jarvis-darker rounded-lg px-3 py-2 border border-jarvis-border">
-        {demo}
+    <article className={`card p-6 md:p-7 text-left fade-up ${delayClass}`}>
+      <span className="mono text-xs text-accent tracking-widest">
+        {String(index + 1).padStart(2, '0')}
+      </span>
+      <h3 className="display text-2xl mt-3 text-ink">{title}</h3>
+      <p className="text-ink-2 text-sm leading-relaxed mt-3">{desc}</p>
+    </article>
+  )
+}
+
+function Features() {
+  return (
+    <section id="features" className="border-t border-line">
+      <div className="max-w-6xl mx-auto px-6 py-24 md:py-32">
+        <p className="eyebrow">Fifteen things it does</p>
+        <h2 className="display text-4xl md:text-5xl mt-5 max-w-3xl leading-tight">
+          One assistant for{' '}
+          <span className="display-italic">everything on your Mac.</span>
+        </h2>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-14">
+          {FEATURES.map((f, i) => (
+            <FeatureCard
+              key={f.title}
+              index={i}
+              title={f.title}
+              desc={f.desc}
+              delayClass={`d${(i % 6) + 1}`}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   )
 }
 
-
-function ArchitectureDiagram() {
+function Architecture() {
   return (
-    <div className="bg-jarvis-card border border-jarvis-border rounded-xl p-8 max-w-3xl mx-auto font-mono text-sm">
-      <div className="text-center space-y-3">
-        <div className="text-jarvis-blue">User Input (Voice / Text / Watch / Phone)</div>
-        <div className="text-zinc-600">↓</div>
-        <div className="flex flex-wrap justify-center gap-2">
-          {['Variable Expansion', 'Alias Expansion', 'Pattern Parser', 'Keyword Match', 'Rust Fuzzy Match', 'NLU Mapping', 'Conversation AI'].map((phase, i) => (
-            <span key={i} className="px-3 py-1 bg-jarvis-darker border border-jarvis-border rounded text-xs text-zinc-300">
-              {i + 1}. {phase}
+    <section className="bg-paper-2/40 border-t border-line">
+      <div className="max-w-5xl mx-auto px-6 py-24 md:py-32">
+        <p className="eyebrow">Under the hood</p>
+        <h2 className="display text-4xl md:text-5xl mt-5 max-w-3xl leading-tight">
+          Seven phases before{' '}
+          <span className="display-italic">it ever guesses.</span>
+        </h2>
+
+        <p className="text-ink-2 text-lg leading-relaxed mt-8 max-w-2xl">
+          Every input runs through a deterministic parsing pipeline. Cheap, exact matches resolve
+          first; the language model is the last resort, not the first.
+        </p>
+
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-3 mt-12">
+          {PARSE_PHASES.map((phase, i) => (
+            <span key={phase} className="inline-flex items-center gap-3">
+              <span className="mono text-sm text-ink border border-line bg-paper rounded-full px-4 py-2">
+                <span className="text-accent">{i + 1}.</span> {phase}
+              </span>
+              {i < PARSE_PHASES.length - 1 && (
+                <span className="text-ink-3 mono" aria-hidden="true">
+                  &rarr;
+                </span>
+              )}
             </span>
           ))}
         </div>
-        <div className="text-zinc-600">↓</div>
-        <div className="text-green-400">45+ Modules → Rust Sidecar / AppleScript / Shell / LLM → Response</div>
+
+        <hr className="rule my-14" />
+
+        <p className="eyebrow">Four execution backends</p>
+        <div className="grid sm:grid-cols-2 gap-5 mt-8">
+          {BACKENDS.map((b) => (
+            <div key={b.name} className="card p-6">
+              <h3 className="display text-xl text-ink">{b.name}</h3>
+              <p className="text-ink-2 text-sm leading-relaxed mt-2">{b.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-12">
+          <a href="/docs" className="text-accent font-medium hover:underline underline-offset-4">
+            Read the full architecture docs <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
       </div>
-    </div>
+    </section>
   )
 }
 
-function App() {
+function Footer() {
   return (
-    <div className="min-h-screen bg-jarvis-darker bg-grid">
-      {/* Nav */}
-      <nav className="fixed top-0 w-full z-50 bg-jarvis-darker/80 backdrop-blur-xl border-b border-jarvis-border">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-yellow-600 shadow-lg shadow-amber-500/20" />
-            <span className="font-mono font-bold text-white tracking-wider">J.A.R.V.I.S.</span>
+    <footer className="border-t border-line bg-paper">
+      <div className="max-w-6xl mx-auto px-6 py-16">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10">
+          <div className="max-w-md">
+            <p className="font-mono font-bold tracking-widest text-ink">J.A.R.V.I.S.</p>
+            <p className="text-ink-2 text-sm leading-relaxed mt-3">
+              Just A Rather Very Intelligent System. A macOS AI assistant with voice, screen
+              awareness, deep research, and a Rust performance sidecar.
+            </p>
           </div>
-          <div className="flex items-center gap-6">
-            <a href="#features" className="text-sm text-zinc-400 hover:text-white transition-colors">Features</a>
-            <a href="#architecture" className="text-sm text-zinc-400 hover:text-white transition-colors">Architecture</a>
-            <a href="/docs" className="text-sm text-zinc-400 hover:text-white transition-colors">Docs</a>
+
+          <nav className="flex flex-wrap gap-x-8 gap-y-3 text-sm" aria-label="Footer">
+            <a href="#features" className="text-ink-2 hover:text-accent transition-colors">
+              Features
+            </a>
+            <a href="/docs" className="text-ink-2 hover:text-accent transition-colors">
+              Docs
+            </a>
             <a
-              href="https://github.com/ArhanCodes/jarvis"
+              href={GITHUB_URL}
               target="_blank"
-              rel="noopener"
-              className="px-4 py-2 bg-jarvis-blue/10 border border-jarvis-blue/30 rounded-lg text-jarvis-blue text-sm hover:bg-jarvis-blue/20 transition-all"
+              rel="noopener noreferrer"
+              className="text-ink-2 hover:text-accent transition-colors"
             >
               GitHub
             </a>
-          </div>
+          </nav>
         </div>
-      </nav>
 
-      {/* Hero */}
-      <section className="pt-32 pb-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="flex justify-center mb-8">
-            <div className="arc-reactor" />
-          </div>
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 tracking-tight animate-fade-in-up">
-            J.A.R.V.I.S.
-          </h1>
-          <p className="text-xl md:text-2xl text-zinc-400 font-light mb-2 animate-fade-in-up delay-100">
-            Just A Rather Very Intelligent System
-          </p>
-          <p className="text-base text-zinc-500 max-w-2xl mx-auto mb-10 animate-fade-in-up delay-200 leading-relaxed">
-            A macOS AI assistant with voice control, screen awareness, deep research, a Rust performance sidecar, and multi-device support. 45+ modules. Self-improving.
-          </p>
+        <hr className="rule my-10" />
 
-          {/* Stats */}
-          <div className="flex justify-center gap-8 md:gap-16 mb-14 animate-fade-in-up delay-300">
-            {STATS.map((stat, i) => (
-              <div key={i} className="text-center">
-                <div className="text-3xl font-bold text-jarvis-blue glow-gold">{stat.value}</div>
-                <div className="text-xs text-zinc-500 mt-1 uppercase tracking-wider">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* CTA */}
-          <div className="flex justify-center gap-4 mb-14 animate-fade-in-up delay-400">
-            <a
-              href="https://github.com/ArhanCodes/jarvis"
-              target="_blank"
-              rel="noopener"
-              className="px-8 py-3 bg-jarvis-blue text-black font-semibold rounded-lg hover:bg-amber-300 transition-all shadow-lg shadow-amber-500/20"
-            >
-              Star on GitHub
-            </a>
-            <a
-              href="#features"
-              className="px-8 py-3 border border-zinc-700 text-zinc-300 rounded-lg hover:border-zinc-500 hover:text-white transition-all"
-            >
-              Explore Features
-            </a>
-          </div>
-
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-sm text-ink-3">
+          <span className="mono">Built by Arhan Harchandani</span>
+          <span className="mono">macOS 13+ &middot; Node 20+</span>
         </div>
-      </section>
-
-      {/* Quick Start */}
-      <section className="py-16 px-6">
-        <div className="max-w-2xl mx-auto">
-          <div className="bg-jarvis-card border border-jarvis-border rounded-xl p-6">
-            <h3 className="text-sm text-zinc-500 uppercase tracking-wider mb-4">Quick Start</h3>
-            <div className="font-mono text-sm space-y-2">
-              <div><span className="text-zinc-500">$</span> <span className="text-green-400">git clone</span> <span className="text-zinc-300">https://github.com/ArhanCodes/jarvis.git</span></div>
-              <div><span className="text-zinc-500">$</span> <span className="text-green-400">cd</span> <span className="text-zinc-300">jarvis && npm install</span></div>
-              <div><span className="text-zinc-500">$</span> <span className="text-green-400">npm run</span> <span className="text-zinc-300">dev</span></div>
-            </div>
-            <p className="text-xs text-zinc-600 mt-4">Requires macOS 13+ and Node.js 20+. Voice commands need Xcode CLI Tools.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section id="features" className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">Features</h2>
-            <p className="text-zinc-500">45+ modules. 500+ commands. Zero latency parsing.</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {FEATURES.map((f, i) => (
-              <FeatureCard key={i} {...f} delay={`delay-${(i % 3) * 100 + 100}`} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Architecture */}
-      <section id="architecture" className="py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">Architecture</h2>
-          <p className="text-zinc-500 mb-10">7-phase parsing engine. No AI for command matching — regex, fuzzy match, then NLU, then conversation.</p>
-          <ArchitectureDiagram />
-        </div>
-      </section>
-
-      {/* Multi-Device */}
-      <section className="py-20 px-6 bg-jarvis-dark/50">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">Multi-Device</h2>
-          <p className="text-zinc-500 mb-10">Same JARVIS, everywhere. Connected via AIM relay.</p>
-          <div className="flex justify-center gap-8 md:gap-16">
-            {[
-              { device: '💻', name: 'Mac', desc: 'Full experience — CLI, voice, menubar, screen awareness' },
-              { device: '📱', name: 'iPhone', desc: 'Send commands and receive responses via companion app' },
-              { device: '⌚', name: 'Apple Watch', desc: 'Quick commands from your wrist with haptic feedback' },
-            ].map((d, i) => (
-              <div key={i} className="text-center">
-                <div className="text-5xl mb-3">{d.device}</div>
-                <div className="text-white font-semibold mb-1">{d.name}</div>
-                <div className="text-xs text-zinc-500 max-w-[150px]">{d.desc}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Terminal Demo */}
-      <section className="py-20 px-6">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">See It In Action</h2>
-            <p className="text-zinc-500">Real commands. Real responses. Zero latency.</p>
-          </div>
-          <TerminalDemo />
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-10 px-6 border-t border-jarvis-border">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-amber-400 to-yellow-600" />
-            <span className="font-mono text-sm text-zinc-500">J.A.R.V.I.S.</span>
-          </div>
-          <div className="text-sm text-zinc-600">
-            Built by <a href="https://arhan.dev" target="_blank" rel="noopener" className="text-zinc-400 hover:text-white transition-colors">Arhan Harchandani</a>
-          </div>
-          <a
-            href="https://github.com/ArhanCodes/jarvis"
-            target="_blank"
-            rel="noopener"
-            className="text-sm text-zinc-500 hover:text-white transition-colors"
-          >
-            GitHub →
-          </a>
-        </div>
-      </footer>
-    </div>
+      </div>
+    </footer>
   )
 }
 
-export default App
+export default function App() {
+  return (
+    <div className="min-h-screen bg-paper text-ink antialiased">
+      <Nav />
+      <main>
+        <Hero />
+        <Stats />
+        <Demo />
+        <Features />
+        <Architecture />
+      </main>
+      <Footer />
+    </div>
+  )
+}
