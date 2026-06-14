@@ -1,4 +1,35 @@
+import { useState, useEffect } from 'react'
 import './index.css'
+
+// Rotating headline word: types a word, holds, deletes, types the next.
+// Upright vermilion (the old accent colour, minus the italics).
+function RotatingWord() {
+  const words = ['companion', 'assistant', 'programmer', 'helper']
+  const [index, setIndex] = useState(0)
+  const [sub, setSub] = useState(words[0].length)
+  const [deleting, setDeleting] = useState(false)
+
+  useEffect(() => {
+    const word = words[index]
+    let t
+    if (!deleting && sub === word.length) {
+      t = setTimeout(() => setDeleting(true), 1700) // hold the full word
+    } else if (deleting && sub === 0) {
+      setDeleting(false)
+      setIndex((index + 1) % words.length) // advance to next word
+    } else {
+      t = setTimeout(() => setSub(sub + (deleting ? -1 : 1)), deleting ? 45 : 90)
+    }
+    return () => clearTimeout(t)
+  }, [sub, deleting, index])
+
+  return (
+    <span className="text-accent whitespace-nowrap">
+      {words[index].slice(0, sub)}
+      <span className="type-cursor" aria-hidden="true" />
+    </span>
+  )
+}
 
 const FEATURES = [
   {
@@ -135,8 +166,7 @@ function Hero() {
         <p className="eyebrow fade-up d1">Just A Rather Very Intelligent System</p>
 
         <h1 className="display text-5xl sm:text-6xl lg:text-7xl leading-[1.04] mt-6 max-w-4xl fade-up d2">
-          Your Mac, run by voice.{' '}
-          <span className="display-italic">Everything, from one prompt.</span>
+          Your Mac <RotatingWord />
         </h1>
 
         <p className="text-ink-2 text-lg md:text-xl leading-relaxed mt-8 max-w-2xl fade-up d3">

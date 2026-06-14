@@ -138,6 +138,18 @@ body {
 .wave i:nth-child(5) { height: 6px; animation-delay: 0.05s; }
 @keyframes wave { 0% { transform: scaleY(0.4); } 100% { transform: scaleY(1); } }
 
+/* ── Typewriter cursor (rotating headline word) ── */
+.type-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.82em;
+  margin-left: 4px;
+  vertical-align: baseline;
+  background: var(--accent);
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
 /* ── Hairline divider ── */
 .rule { height: 1.5px; background: var(--line); border: 0; }
 
