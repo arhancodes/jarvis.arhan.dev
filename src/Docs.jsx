@@ -70,7 +70,7 @@ function Bullets({ items }) {
     <ul className="space-y-3 mb-6">
       {items.map((it, i) => (
         <li key={i} className="flex gap-3 text-ink-2 leading-relaxed text-[1.02rem]">
-          <span className="text-accent mt-0.5 flex-shrink-0">—</span>
+          <span className="text-accent mt-0.5 flex-shrink-0">›</span>
           <span>{it}</span>
         </li>
       ))}
@@ -99,7 +99,7 @@ function CommandList({ rows }) {
   )
 }
 
-/* A titled card holding a CommandList — used to group a module's commands. */
+/* A titled card holding a CommandList - used to group a module's commands. */
 function ModuleBlock({ title, intro, rows, children }) {
   return (
     <div className="mb-12">
@@ -118,7 +118,7 @@ const PARSE_PHASES = [
   { name: 'Alias Expansion', desc: 'Resolves user-defined shortcuts into the full commands they stand for.' },
   { name: 'Pattern Parser', desc: 'Each module declares regex patterns; the first match wins with confidence 1.0.' },
   { name: 'Keyword Match', desc: 'Exact keyword lookup against every registered module (confidence 0.6).' },
-  { name: 'Rust Fuzzy Match', desc: 'Levenshtein typo correction via the Rust sidecar — "baterry" still resolves to battery.' },
+  { name: 'Rust Fuzzy Match', desc: 'Levenshtein typo correction via the Rust sidecar - "baterry" still resolves to battery.' },
   { name: 'NLU Mapping', desc: 'Natural-language phrases mapped onto existing commands (confidence 0.5).' },
   { name: 'Conversation AI', desc: 'If nothing matches, the input is treated as natural language and handed to Claude.' },
 ]
@@ -135,10 +135,10 @@ const BACKENDS = [
 function GettingStarted() {
   return (
     <section id="getting-started" className="scroll-mt-28 mb-24">
-      <Eyebrow>01 — Setup</Eyebrow>
+      <Eyebrow>01 - Setup</Eyebrow>
       <SectionHeading>Getting started</SectionHeading>
       <Lead>
-        J.A.R.V.I.S. — Just A Rather Very Intelligent System — is a macOS AI assistant with
+        J.A.R.V.I.S. - Just A Rather Very Intelligent System - is a macOS AI assistant with
         voice control, screen awareness, browser automation, 45+ modules, a Rust performance
         sidecar, and companion apps on Apple Watch and iPhone. It runs as a CLI daemon with
         optional always-on voice activation.
@@ -147,11 +147,11 @@ function GettingStarted() {
       <SubHeading>Requirements</SubHeading>
       <Bullets
         items={[
-          <><strong className="text-ink">macOS 13 (Ventura) or later</strong> — tested on macOS 14 Sonoma, Apple Silicon.</>,
+          <><strong className="text-ink">macOS 13 (Ventura) or later</strong> - tested on macOS 14 Sonoma, Apple Silicon.</>,
           <><strong className="text-ink">Node.js 20+</strong>.</>,
-          <><strong className="text-ink">Xcode Command Line Tools</strong> for voice and screen features — <Code>xcode-select --install</Code>.</>,
-          <><strong className="text-ink">Rust toolchain</strong> — optional, only needed to build the performance sidecar.</>,
-          <><strong className="text-ink">Claude API key</strong> — powers the conversation engine and AI commands.</>,
+          <><strong className="text-ink">Xcode Command Line Tools</strong> for voice and screen features - <Code>xcode-select --install</Code>.</>,
+          <><strong className="text-ink">Rust toolchain</strong> - optional, only needed to build the performance sidecar.</>,
+          <><strong className="text-ink">Claude API key</strong> - powers the conversation engine and AI commands.</>,
         ]}
       />
 
@@ -168,14 +168,14 @@ $ # add your Claude API key to config/llm-config.json
 $ npm run dev`}
       </CodeBlock>
       <Prose>
-        Configuration lives in <Code>config/</Code>. The Rust sidecar is optional — build it with{' '}
+        Configuration lives in <Code>config/</Code>. The Rust sidecar is optional - build it with{' '}
         <Code>cd rust-sidecar && cargo build --release</Code>, and JARVIS falls back to TypeScript
         with no loss of functionality when it is absent. To install globally, run{' '}
         <Code>npm link</Code> and then just type <Code>jarvis</Code> anywhere.
       </Prose>
 
       <SubHeading>Your first commands</SubHeading>
-      <Prose>Once running, type naturally at the prompt — or say "Jarvis" to go hands-free.</Prose>
+      <Prose>Once running, type naturally at the prompt - or say "Jarvis" to go hands-free.</Prose>
       <CommandList
         rows={[
           { cmd: 'battery', desc: 'Charge %, charging state, and time remaining.' },
@@ -193,11 +193,11 @@ $ npm run dev`}
 function CoreConcepts() {
   return (
     <section id="core-concepts" className="scroll-mt-28 mb-24">
-      <Eyebrow>02 — Internals</Eyebrow>
+      <Eyebrow>02 - Internals</Eyebrow>
       <SectionHeading>Core concepts</SectionHeading>
       <Lead>
         Every input flows through a <strong className="text-ink">seven-phase parser</strong> before
-        it ever reaches the AI. Most commands resolve instantly with no LLM call at all — the
+        it ever reaches the AI. Most commands resolve instantly with no LLM call at all - the
         conversation engine is the last resort, not the first.
       </Lead>
 
@@ -266,7 +266,7 @@ jarvis> open Safari; open Chrome; tile Safari left; tile Chrome right`}
         rows={[
           { cmd: 'alias deploy = run npm run build', desc: 'Create a shortcut for any command.' },
           { cmd: 'aliases', desc: 'List every alias you have defined.' },
-          { cmd: 'history', desc: 'Show recent commands — persistent across sessions.' },
+          { cmd: 'history', desc: 'Show recent commands - persistent across sessions.' },
           { cmd: '!!', desc: 'Repeat the last command.' },
           { cmd: 'history search volume', desc: 'Search command history.' },
           { cmd: 'startup add battery', desc: 'Auto-run a command every time JARVIS launches.' },
@@ -292,7 +292,7 @@ jarvis> neetwork
 function VoiceConversation() {
   return (
     <section id="voice" className="scroll-mt-28 mb-24">
-      <Eyebrow>03 — Hands-free</Eyebrow>
+      <Eyebrow>03 - Hands-free</Eyebrow>
       <SectionHeading>Voice &amp; conversation</SectionHeading>
 
       <div className="mb-6">
@@ -312,10 +312,10 @@ function VoiceConversation() {
       <SubHeading>How voice works</SubHeading>
       <Bullets
         items={[
-          <>Say <strong className="text-ink">"Jarvis"</strong> — the wake word is detected on-device with Apple's SFSpeechRecognizer.</>,
+          <>Say <strong className="text-ink">"Jarvis"</strong> - the wake word is detected on-device with Apple's SFSpeechRecognizer.</>,
           <>Your command is transcribed locally and sent through the standard 7-phase parser.</>,
           <>Responses are synthesized <strong className="text-ink">sentence-by-sentence</strong> with streaming TTS via <strong className="text-ink">ElevenLabs</strong>, or Edge TTS as a free fallback.</>,
-          <>Interrupt at any time — say <strong className="text-ink">"Jarvis"</strong> mid-response to cut it off and issue a new command.</>,
+          <>Interrupt at any time - say <strong className="text-ink">"Jarvis"</strong> mid-response to cut it off and issue a new command.</>,
         ]}
       />
       <CommandList
@@ -338,10 +338,10 @@ function VoiceConversation() {
   ✓ Dark mode enabled
   [action] volume 30
   ✓ Volume set to 30%
-  Done — dark mode is on and volume is at 30%.
+  Done - dark mode is on and volume is at 30%.
 
 jarvis> remember that my project deadline is March 20th
-  ✓ Noted — I'll remember your project deadline is March 20th.`}
+  ✓ Noted - I'll remember your project deadline is March 20th.`}
       </CodeBlock>
       <CommandList
         rows={[
@@ -356,10 +356,10 @@ jarvis> remember that my project deadline is March 20th
 function SystemApps() {
   return (
     <section id="system" className="scroll-mt-28 mb-24">
-      <Eyebrow>04 — Modules</Eyebrow>
+      <Eyebrow>04 - Modules</Eyebrow>
       <SectionHeading>System &amp; apps</SectionHeading>
       <Lead>
-        Launch apps, read live system stats, manage processes, and arrange windows — all with
+        Launch apps, read live system stats, manage processes, and arrange windows - all with
         plain commands.
       </Lead>
 
@@ -383,7 +383,7 @@ function SystemApps() {
           { cmd: 'disk  /  storage  /  space', desc: 'Disk usage and available space.' },
           { cmd: 'battery', desc: 'Charge %, state, and time remaining.' },
           { cmd: 'network  /  wifi  /  ip', desc: 'Local IP and WiFi network name.' },
-          { cmd: 'status', desc: 'A full report — all of the above at once.' },
+          { cmd: 'status', desc: 'A full report - all of the above at once.' },
         ]}
       />
 
@@ -422,16 +422,16 @@ function SystemApps() {
 function FilesControl() {
   return (
     <section id="files-control" className="scroll-mt-28 mb-24">
-      <Eyebrow>05 — Modules</Eyebrow>
+      <Eyebrow>05 - Modules</Eyebrow>
       <SectionHeading>Files &amp; control</SectionHeading>
       <Lead>
         Search and move files, control system settings, run shell commands safely, manage the
-        clipboard, and set timers — the everyday toolkit.
+        clipboard, and set timers - the everyday toolkit.
       </Lead>
 
       <ModuleBlock
         title="File Operations"
-        intro="Spotlight-powered search and safe file management — delete moves to Trash, never permanent."
+        intro="Spotlight-powered search and safe file management - delete moves to Trash, never permanent."
         rows={[
           { cmd: 'search <name>', desc: 'Instant Spotlight (mdfind) file search.' },
           { cmd: 'open folder <path>', desc: 'Open a folder in Finder.' },
@@ -497,7 +497,7 @@ function FilesControl() {
 
       <ModuleBlock
         title="Conversions"
-        intro="Unit and timezone conversions — always exact, no LLM needed."
+        intro="Unit and timezone conversions - always exact, no LLM needed."
         rows={[
           { cmd: 'convert 5 miles to km', desc: 'Convert between units.' },
           { cmd: 'time in Tokyo', desc: 'Look up the time in any timezone.' },
@@ -510,7 +510,7 @@ function FilesControl() {
 function MediaBrowser() {
   return (
     <section id="media-browser" className="scroll-mt-28 mb-24">
-      <Eyebrow>06 — Modules</Eyebrow>
+      <Eyebrow>06 - Modules</Eyebrow>
       <SectionHeading>Media &amp; browser</SectionHeading>
       <Lead>
         Control playback across Spotify and Apple Music, drive a real browser with Playwright, and
@@ -533,9 +533,9 @@ function MediaBrowser() {
 
       <ModuleBlock
         title="Browser Control"
-        intro="Read a URL instantly with fetch + Claude (no browser), or drive a real browser for interaction — navigate, search, click, fill forms, screenshot."
+        intro="Read a URL instantly with fetch + Claude (no browser), or drive a real browser for interaction - navigate, search, click, fill forms, screenshot."
         rows={[
-          { cmd: 'read <url>  /  summarize <url>', desc: 'Read & summarize a page with fetch + Claude — no browser launch. Falls back to a real browser only for JS-heavy pages.' },
+          { cmd: 'read <url>  /  summarize <url>', desc: 'Read & summarize a page with fetch + Claude - no browser launch. Falls back to a real browser only for JS-heavy pages.' },
           { cmd: 'browse <url>  /  go to <url>', desc: 'Open a URL in the browser.' },
           { cmd: 'search <query>', desc: 'Run a Google search.' },
           { cmd: 'read this page', desc: 'Extract content from the currently open browser page.' },
@@ -569,16 +569,16 @@ function MediaBrowser() {
 function Screen() {
   return (
     <section id="screen" className="scroll-mt-28 mb-24">
-      <Eyebrow>07 — Modules</Eyebrow>
+      <Eyebrow>07 - Modules</Eyebrow>
       <SectionHeading>Screen awareness</SectionHeading>
       <Lead>
-        JARVIS sees your screen with Claude vision — it reads a screenshot directly, so it
+        JARVIS sees your screen with Claude vision - it reads a screenshot directly, so it
         understands layout, buttons, and content, not just text.
       </Lead>
 
       <ModuleBlock
         title="Screen Awareness"
-        intro="Claude vision reads the screenshot directly — one call, no OCR step — so it's faster and more accurate. OCR (macOS Vision / Tesseract) stays as an offline fallback. Screen context can also be injected into a conversation for context-aware answers."
+        intro="Claude vision reads the screenshot directly - one call, no OCR step - so it's faster and more accurate. OCR (macOS Vision / Tesseract) stays as an offline fallback. Screen context can also be injected into a conversation for context-aware answers."
         rows={[
           { cmd: "what's on my screen", desc: 'Claude vision describes what it sees.' },
           { cmd: 'summarize my screen', desc: 'A 2-3 sentence summary of the current screen.' },
@@ -602,11 +602,11 @@ function Screen() {
 function Comms() {
   return (
     <section id="comms" className="scroll-mt-28 mb-24">
-      <Eyebrow>08 — Modules</Eyebrow>
+      <Eyebrow>08 - Modules</Eyebrow>
       <SectionHeading>Comms &amp; WhatsApp</SectionHeading>
       <Lead>
         WhatsApp is built on the <strong className="text-ink">Baileys multi-device protocol</strong>{' '}
-        — no browser, no Selenium. Sends are <strong className="text-ink">instant (sub-second)</strong>.
+        - no browser, no Selenium. Sends are <strong className="text-ink">instant (sub-second)</strong>.
         Link your account once by scanning a QR code, and JARVIS stays connected in the background.
       </Lead>
 
@@ -629,7 +629,7 @@ function Comms() {
 
       <ModuleBlock
         title="Dossier"
-        intro="Builds person and company intelligence profiles — a quick briefing on who you are about to talk to."
+        intro="Builds person and company intelligence profiles - a quick briefing on who you are about to talk to."
       />
     </section>
   )
@@ -638,10 +638,10 @@ function Comms() {
 function Info() {
   return (
     <section id="info" className="scroll-mt-28 mb-24">
-      <Eyebrow>09 — Modules</Eyebrow>
+      <Eyebrow>09 - Modules</Eyebrow>
       <SectionHeading>Weather, news &amp; info</SectionHeading>
       <Lead>
-        Quick informational lookups and uptime checks — useful on their own and as building blocks
+        Quick informational lookups and uptime checks - useful on their own and as building blocks
         for routines.
       </Lead>
 
@@ -679,7 +679,7 @@ function Info() {
 function Automation() {
   return (
     <section id="automation" className="scroll-mt-28 mb-24">
-      <Eyebrow>10 — Modules</Eyebrow>
+      <Eyebrow>10 - Modules</Eyebrow>
       <SectionHeading>Automation</SectionHeading>
       <Lead>
         Save multi-step workflows, schedule recurring tasks, and trigger whole routines with a
@@ -723,7 +723,7 @@ function Automation() {
         intro="Run work in parallel and call any API in plain language."
         rows={[
           { cmd: 'multi-agent <tasks>', desc: 'Parallel task execution via Promise.allSettled.' },
-          { cmd: 'call <api> ...', desc: 'API orchestrator — hit any API by natural language.' },
+          { cmd: 'call <api> ...', desc: 'API orchestrator - hit any API by natural language.' },
         ]}
       />
     </section>
@@ -733,10 +733,10 @@ function Automation() {
 function AIResearch() {
   return (
     <section id="ai-research" className="scroll-mt-28 mb-24">
-      <Eyebrow>11 — Modules</Eyebrow>
+      <Eyebrow>11 - Modules</Eyebrow>
       <SectionHeading>AI &amp; research</SectionHeading>
       <Lead>
-        Chat with Claude, get smart suggestions, and run academic-grade research — all from the
+        Chat with Claude, get smart suggestions, and run academic-grade research - all from the
         prompt. If the AI is unavailable, every other JARVIS feature keeps working.
       </Lead>
 
@@ -779,7 +779,7 @@ function AIResearch() {
         title="More AI modules"
         intro="The wider AI surface area."
         rows={[
-          { cmd: 'morning digest', desc: 'Daily briefing — weather, calendar, email, and news.' },
+          { cmd: 'morning digest', desc: 'Daily briefing - weather, calendar, email, and news.' },
           { cmd: 'file intelligence', desc: 'Advanced file analysis and search.' },
           { cmd: 'data connectors', desc: 'Slack, Notion, Apple Health, and Strava.' },
           { cmd: 'energy monitor', desc: 'Track operation energy and LLM costs.' },
@@ -793,7 +793,7 @@ function AIResearch() {
 function Productivity() {
   return (
     <section id="productivity" className="scroll-mt-28 mb-24">
-      <Eyebrow>12 — Modules</Eyebrow>
+      <Eyebrow>12 - Modules</Eyebrow>
       <SectionHeading>Email &amp; calendar</SectionHeading>
       <Lead>
         Connect Gmail and Google Calendar through the Google API for inbox triage and scheduling
@@ -824,10 +824,10 @@ function Productivity() {
 function SmartHome() {
   return (
     <section id="smart-home" className="scroll-mt-28 mb-24">
-      <Eyebrow>13 — Modules</Eyebrow>
+      <Eyebrow>13 - Modules</Eyebrow>
       <SectionHeading>Smart home</SectionHeading>
       <Lead>
-        Control HomeKit accessories through macOS Shortcuts — lights, scenes, and devices, all by
+        Control HomeKit accessories through macOS Shortcuts - lights, scenes, and devices, all by
         voice or prompt.
       </Lead>
 
@@ -846,21 +846,21 @@ function SmartHome() {
 function Intelligence() {
   return (
     <section id="intelligence" className="scroll-mt-28 mb-24">
-      <Eyebrow>14 — Under the hood</Eyebrow>
+      <Eyebrow>14 - Under the hood</Eyebrow>
       <SectionHeading>Intelligence layer</SectionHeading>
       <Lead>
         JARVIS learns from how you use it. Every command is recorded as a trace with timing and
-        context — time of day, active app, voice mode, and result — and the learning engine mines
+        context - time of day, active app, voice mode, and result - and the learning engine mines
         those traces to get sharper over time.
       </Lead>
 
       <Bullets
         items={[
-          <><strong className="text-ink">Trace recording</strong> — every command logged with timing and context (capped at the last 5,000).</>,
-          <><strong className="text-ink">Route prediction</strong> — suggests likely modules from your usage patterns.</>,
-          <><strong className="text-ink">Habit detection</strong> — identifies daily routines worth automating.</>,
-          <><strong className="text-ink">Memory search</strong> — hybrid TF-IDF plus Rust vector search over stored facts.</>,
-          <><strong className="text-ink">Context injection</strong> — relevant context is fed into LLM prompts automatically.</>,
+          <><strong className="text-ink">Trace recording</strong> - every command logged with timing and context (capped at the last 5,000).</>,
+          <><strong className="text-ink">Route prediction</strong> - suggests likely modules from your usage patterns.</>,
+          <><strong className="text-ink">Habit detection</strong> - identifies daily routines worth automating.</>,
+          <><strong className="text-ink">Memory search</strong> - hybrid TF-IDF plus Rust vector search over stored facts.</>,
+          <><strong className="text-ink">Context injection</strong> - relevant context is fed into LLM prompts automatically.</>,
         ]}
       />
 
@@ -881,7 +881,7 @@ function Intelligence() {
 
       <SubHeading>Security monitoring</SubHeading>
       <Prose>
-        An always-on layer watches for trouble in the background — a{' '}
+        An always-on layer watches for trouble in the background - a{' '}
         <strong className="text-ink">breach monitor</strong>, a{' '}
         <strong className="text-ink">network guardian</strong> that tracks devices on your network,
         and a <strong className="text-ink">threat detector</strong>.
@@ -893,7 +893,7 @@ function Intelligence() {
 function MultiDevice() {
   return (
     <section id="multi-device" className="scroll-mt-28 mb-24">
-      <Eyebrow>15 — Reach</Eyebrow>
+      <Eyebrow>15 - Reach</Eyebrow>
       <SectionHeading>Multi-device</SectionHeading>
       <Lead>
         JARVIS reaches across your devices through an{' '}
@@ -903,7 +903,7 @@ function MultiDevice() {
 
       <div className="grid sm:grid-cols-3 gap-4 mb-8">
         {[
-          { name: 'Mac', desc: 'The full experience — CLI, voice, menubar, and screen awareness.' },
+          { name: 'Mac', desc: 'The full experience - CLI, voice, menubar, and screen awareness.' },
           { name: 'iPhone', desc: 'Send commands and receive responses through the companion app.' },
           { name: 'Apple Watch', desc: 'Quick commands from your wrist with haptic feedback.' },
         ].map((d) => (
@@ -927,11 +927,11 @@ function MultiDevice() {
 function Plugins() {
   return (
     <section id="plugins" className="scroll-mt-28 mb-12">
-      <Eyebrow>16 — Extend</Eyebrow>
+      <Eyebrow>16 - Extend</Eyebrow>
       <SectionHeading>Plugins</SectionHeading>
       <Lead>
         JARVIS uses a decorator-based module system. Every module is a class decorated with{' '}
-        <Code>@RegisterModule()</Code> that declares its commands, patterns, and handlers — and
+        <Code>@RegisterModule()</Code> that declares its commands, patterns, and handlers - and
         modules are <strong className="text-ink">hot-reloadable</strong>, so you drop a file in
         with no restart.
       </Lead>
@@ -956,7 +956,7 @@ export class MyModule implements Module {
 
       <SubHeading>Or have JARVIS write it</SubHeading>
       <Prose>
-        The self-improve module turns a natural-language description into a working module — it
+        The self-improve module turns a natural-language description into a working module - it
         generates TypeScript, validates it, and hot-loads it into the running system. External
         plugin packages load through the same registry, parser, and intelligence layer as the
         built-ins.
@@ -975,8 +975,150 @@ export class MyModule implements Module {
 
 /* ── Page shell ───────────────────────────────────────────────────── */
 
+/* ── ⌘K search ────────────────────────────────────────────────────── */
+
+// Build a searchable index from the rendered docs: every section (nav), every
+// subheading, and every command row (code.font-medium + its description).
+function buildSearchIndex() {
+  const items = []
+  const seen = new Set()
+  SECTIONS.forEach((s) => {
+    const el = document.getElementById(s.id)
+    if (!el) return
+    items.push({ id: s.id, kind: 'nav', title: s.label, sub: 'Section' })
+    el.querySelectorAll('h3').forEach((h) => {
+      const t = h.textContent.trim()
+      const key = 'h|' + s.id + '|' + t
+      if (t && !seen.has(key)) { seen.add(key); items.push({ id: s.id, kind: 'content', title: t, sub: s.label }) }
+    })
+    el.querySelectorAll('code.font-medium').forEach((c) => {
+      const t = c.textContent.trim()
+      if (t.length < 2) return
+      const key = 'c|' + s.id + '|' + t
+      if (seen.has(key)) return
+      seen.add(key)
+      const desc = c.parentElement?.querySelector('span')?.textContent?.trim() || ''
+      items.push({ id: s.id, kind: 'content', title: t, sub: desc || s.label })
+    })
+  })
+  return items
+}
+
+function DocSearch({ open, onClose, index, onPick }) {
+  const [q, setQ] = useState('')
+  const [sel, setSel] = useState(0)
+
+  useEffect(() => { if (open) { setQ(''); setSel(0) } }, [open])
+
+  const query = q.trim().toLowerCase()
+  const results = query
+    ? index.filter((it) => it.title.toLowerCase().includes(query) || it.sub.toLowerCase().includes(query))
+    : index.filter((it) => it.kind === 'nav')
+  const navResults = results.filter((r) => r.kind === 'nav').slice(0, 8)
+  const contentResults = results.filter((r) => r.kind === 'content').slice(0, 40)
+  const flat = [...navResults, ...contentResults]
+  const selClamped = flat.length ? Math.min(sel, flat.length - 1) : 0
+
+  if (!open) return null
+
+  function onKeyDown(e) {
+    if (e.key === 'ArrowDown') { e.preventDefault(); setSel((s) => Math.min(s + 1, flat.length - 1)) }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); setSel((s) => Math.max(s - 1, 0)) }
+    else if (e.key === 'Enter') { e.preventDefault(); if (flat[selClamped]) onPick(flat[selClamped].id) }
+  }
+
+  const Row = ({ r, i }) => (
+    <button
+      onClick={() => onPick(r.id)}
+      onMouseMove={() => setSel(i)}
+      className={`w-full text-left px-4 py-2.5 flex items-baseline gap-3 transition-colors ${
+        selClamped === i ? 'bg-accent/10' : 'hover:bg-paper-2'
+      }`}
+    >
+      <span className={`text-[0.95rem] ${r.kind === 'content' && /^[a-z]/.test(r.title) ? 'mono text-accent' : 'text-ink'}`}>
+        {r.title}
+      </span>
+      <span className="text-ink-3 text-xs truncate">{r.sub}</span>
+    </button>
+  )
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-start justify-center pt-[12vh] px-4" onMouseDown={onClose}>
+      <div className="absolute inset-0 bg-ink/40 backdrop-blur-sm" />
+      <div
+        className="relative w-full max-w-xl bg-paper border border-line rounded-2xl shadow-2xl overflow-hidden"
+        onMouseDown={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center gap-3 px-4 border-b border-line">
+          <span className="text-ink-3" aria-hidden="true">⌕</span>
+          <input
+            autoFocus
+            value={q}
+            onChange={(e) => { setQ(e.target.value); setSel(0) }}
+            onKeyDown={onKeyDown}
+            placeholder="Search the docs…"
+            className="flex-1 bg-transparent py-4 text-ink outline-none placeholder:text-ink-3 text-[1.02rem]"
+          />
+          <kbd className="mono text-[0.62rem] text-ink-3 border border-line rounded px-1.5 py-0.5">esc</kbd>
+        </div>
+        <div className="max-h-[60vh] overflow-y-auto py-2">
+          {flat.length === 0 && (
+            <div className="px-4 py-10 text-center text-ink-3 text-sm">No results for "{q}".</div>
+          )}
+          {query && navResults.length === 0 && contentResults.length > 0 && (
+            <div className="px-4 pb-2 pt-1 text-ink-3 text-xs">
+              No nav matches. Check content results below or clear search.
+            </div>
+          )}
+          {navResults.length > 0 && (
+            <div className="eyebrow text-[0.6rem] px-4 pt-2 pb-1">Navigation</div>
+          )}
+          {navResults.map((r, i) => <Row key={'n' + i} r={r} i={i} />)}
+          {contentResults.length > 0 && (
+            <div className="eyebrow text-[0.6rem] px-4 pt-3 pb-1">Content</div>
+          )}
+          {contentResults.map((r, i) => <Row key={'c' + i} r={r} i={navResults.length + i} />)}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function Docs() {
   const [active, setActive] = useState('getting-started')
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [index, setIndex] = useState([])
+
+  // Build the search index once the sections have rendered.
+  useEffect(() => {
+    const id = setTimeout(() => setIndex(buildSearchIndex()), 0)
+    return () => clearTimeout(id)
+  }, [])
+
+  // ⌘K / Ctrl+K to open, Esc to close.
+  useEffect(() => {
+    const onKey = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault(); setSearchOpen((o) => !o)
+      } else if (e.key === 'Escape') {
+        setSearchOpen(false)
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
+
+  const pick = (id) => {
+    setSearchOpen(false)
+    setActive(id)
+    // Native hash navigation — the same mechanism the sidebar links use, which
+    // respects the section scroll-margin and the page's scroll container.
+    if (window.location.hash === `#${id}`) {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      window.location.hash = id
+    }
+  }
 
   useEffect(() => {
     const ids = SECTIONS.map((s) => s.id)
@@ -998,6 +1140,7 @@ function Docs() {
 
   return (
     <div className="min-h-screen bg-paper text-ink bg-grid">
+      <DocSearch open={searchOpen} onClose={() => setSearchOpen(false)} index={index} onPick={pick} />
       {/* Nav */}
       <nav className="fixed top-0 w-full z-50 bg-paper/80 backdrop-blur-md border-b border-line">
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -1005,6 +1148,15 @@ function Docs() {
             JARVIS
           </a>
           <div className="flex items-center gap-6 text-sm">
+            <button
+              onClick={() => setSearchOpen(true)}
+              className="inline-flex items-center gap-2 rounded-lg border border-line bg-paper-2/60 px-3 py-1.5 text-ink-3 hover:text-ink hover:border-[#B9AD98] transition-colors"
+              aria-label="Search docs"
+            >
+              <span aria-hidden="true">⌕</span>
+              <span className="hidden sm:inline">Search</span>
+              <kbd className="mono text-[0.6rem] border border-line rounded px-1 py-0.5 hidden sm:inline">⌘K</kbd>
+            </button>
             <a href="#getting-started" className="hidden sm:inline text-ink-2 hover:text-accent transition-colors">
               Setup
             </a>
@@ -1097,7 +1249,7 @@ function Docs() {
               J.A.R.V.I.S.
             </div>
             <p className="text-ink-3 text-sm max-w-sm leading-relaxed">
-              Just A Rather Very Intelligent System — a self-improving macOS AI assistant.
+              Just A Rather Very Intelligent System - a self-improving macOS AI assistant.
             </p>
           </div>
           <div className="flex items-center gap-6 text-sm">

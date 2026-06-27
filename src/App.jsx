@@ -90,7 +90,7 @@ const FEATURES = [
   },
   {
     title: 'WhatsApp',
-    desc: 'Instant WhatsApp messaging via the multi-device protocol (Baileys) — sub-second sends, no browser.',
+    desc: 'Instant WhatsApp messaging via the multi-device protocol (Baileys) - sub-second sends, no browser.',
   },
 ]
 
@@ -165,6 +165,13 @@ function Hero() {
       <div className="max-w-5xl mx-auto px-6 pt-40 pb-28 md:pt-48 md:pb-36">
         <p className="eyebrow fade-up d1">Just A Rather Very Intelligent System</p>
 
+        <div className="fade-up d2 mt-5">
+          <span className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 text-accent px-3.5 py-1.5 text-sm font-medium">
+            <span aria-hidden="true">🏆</span>
+            Dubai Science Fair 2026 Finalist (2nd Place)
+          </span>
+        </div>
+
         <h1 className="display text-5xl sm:text-6xl lg:text-7xl leading-[1.04] mt-6 max-w-4xl fade-up d2">
           Your macOS <RotatingWord />
         </h1>
@@ -235,7 +242,7 @@ function Demo() {
             <span className="w-3 h-3 rounded-full border border-line bg-paper-3" />
             <span className="w-3 h-3 rounded-full border border-line bg-paper-3" />
             <span className="mono text-xs text-ink-3 ml-3 tracking-wide">
-              jarvis — voice-daemon
+              jarvis - voice-daemon
             </span>
           </div>
 
